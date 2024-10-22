@@ -27,6 +27,9 @@ jobs:
       - name: Display the release tag
         run: echo ${{ github.event.release.tag_name }}
 
+      - name: List temp
+        run: ls -l 
+
       - name: Build the executables
         run: ./build-executables.sh ${{ github.event.release.tag_name }}
 
