@@ -30,6 +30,9 @@ jobs:
       - name: List temp
         run: ls -l 
 
+      - name: Make the build script executable
+        run: chmod +x ./build-executables.sh
+
       - name: Build the executables
         run: ./build-executables.sh ${{ github.event.release.tag_name }}
 
