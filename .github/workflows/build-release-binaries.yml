@@ -12,6 +12,8 @@ jobs:
   build:
     name: Build Release Assets
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,9 +28,6 @@ jobs:
 
       - name: Display the release tag
         run: echo ${{ github.event.release.tag_name }}
-
-      - name: List temp
-        run: ls -l 
 
       - name: Make the build script executable
         run: chmod +x ./build-executables.sh
