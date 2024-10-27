@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -13,6 +14,14 @@ import (
 	"github.com/pantheon-bolt/bifrost/model"
 	"github.com/pantheon-bolt/bifrost/repository/api"
 )
+
+type Repo interface {
+	Insert(ctx context.Context, api Api) error
+	FindByID(ctx context.Context, id string) (Api, error)
+	DeleteByID(ctx context.Context, id string) error
+	Update(ctx context.Context, api Api) error
+	FindAll(ctx context.Context, page api.FindAllPage) (api.FindResult, error)
+}
 
 type Api struct {
 	Repo *api.RedisRepo
