@@ -59,8 +59,6 @@ func (a *Api) Create(w http.ResponseWriter, r *http.Request) {
 		Body:            body.Body,
 	}
 
-	fmt.Println(api.ApiID)
-
 	err := a.Repo.Insert(r.Context(), api)
 	if err != nil {
 		fmt.Println("[>] failed to insert: ", err)
@@ -129,8 +127,6 @@ func (a *Api) GetByID(w http.ResponseWriter, r *http.Request) {
 
 	idParam := chi.URLParam(r, "id")
 
-	fmt.Println(idParam)
-
 	const base = 10
 	const bitSize = 64
 
@@ -140,11 +136,7 @@ func (a *Api) GetByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(apiID)
-
 	o, err := a.Repo.FindByID(r.Context(), apiID)
-
-	fmt.Println(o)
 
 	if errors.Is(err, api.ErrNotExist) {
 		w.WriteHeader(http.StatusNotFound)

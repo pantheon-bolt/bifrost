@@ -15,11 +15,6 @@ type RedisRepo struct {
 	Client *redis.Client
 }
 
-// TODO:
-//
-//	func apiIDKey(id uint64) string {
-//		return fmt.Sprintf("api:%d", id)
-//	}
 func apiIDKey(id string) string {
 	return fmt.Sprintf("api:%s", id)
 }
@@ -55,10 +50,7 @@ func (r *RedisRepo) Insert(ctx context.Context, api model.Api) error {
 var ErrNotExist = errors.New("[>] api does not exist")
 
 func (r *RedisRepo) FindByID(ctx context.Context, id uint64) (model.Api, error) {
-	// TODO:
-	// key := apiIDKey(id)
 	key := apiIDKey(strconv.FormatUint(id, 10))
-	fmt.Println(id, key)
 
 	value, err := r.Client.Get(ctx, key).Result()
 	if errors.Is(err, redis.Nil) {
@@ -77,8 +69,6 @@ func (r *RedisRepo) FindByID(ctx context.Context, id uint64) (model.Api, error) 
 }
 
 func (r *RedisRepo) DeleteByID(ctx context.Context, id uint64) error {
-	// TODO:
-	// key := apiIDKey(id)
 	key := apiIDKey(strconv.FormatUint(id, 10))
 
 	txn := r.Client.TxPipeline()
