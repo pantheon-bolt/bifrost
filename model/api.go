@@ -7,7 +7,9 @@ import (
 )
 
 type Api struct {
-	ApiID           uuid.UUID    `json:"api_id"`
+	// TODO:
+	// ApiID           uint64       `json:"api_id"`
+	ApiID           string       `json:"api_id"`
 	CreatedAt       *time.Time   `json:"created_at"`
 	UpdatedAt       *time.Time   `json:"updated_at"`
 	Headers         []Header     `json:"headers"`

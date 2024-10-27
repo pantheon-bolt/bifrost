@@ -6,9 +6,10 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/pantheon-bolt/bifrost/handler"
+	"github.com/pantheon-bolt/bifrost/repository/api"
 )
 
-func loadRoutes() *chi.Mux {
+func (a *App) loadRoutes() {
 	router := chi.NewRouter()
 
 	router.Use(middleware.Logger)
@@ -17,13 +18,17 @@ func loadRoutes() *chi.Mux {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	router.Route("/apis", loadApiRoutes)
+	router.Route("/apis", a.loadApiRoutes)
 
-	return router
+	a.router = router
 }
 
-func loadApiRoutes(router chi.Router) {
-	apiHandler := &handler.Api{}
+func (a *App) loadApiRoutes(router chi.Router) {
+	apiHandler := &handler.Api{
+		Repo: &api.RedisRepo{
+			Client: a.rdb,
+		},
+	}
 
 	router.Post("/", apiHandler.Create)
 	router.Get("/", apiHandler.List)
