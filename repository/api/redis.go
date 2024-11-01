@@ -47,8 +47,6 @@ func (r *RedisRepo) Insert(ctx context.Context, api model.Api) error {
 	return nil
 }
 
-var ErrNotExist = errors.New("[>] api does not exist")
-
 func (r *RedisRepo) FindByID(ctx context.Context, id uint64) (model.Api, error) {
 	key := apiIDKey(strconv.FormatUint(id, 10))
 
@@ -110,16 +108,6 @@ func (r *RedisRepo) Update(ctx context.Context, api model.Api) error {
 	}
 
 	return nil
-}
-
-type FindAllPage struct {
-	Size   uint64
-	Offset uint64
-}
-
-type FindResult struct {
-	Apis   []model.Api
-	Cursor uint64
 }
 
 func (r *RedisRepo) FindAll(ctx context.Context, page FindAllPage) (FindResult, error) {

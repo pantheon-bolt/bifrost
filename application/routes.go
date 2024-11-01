@@ -24,6 +24,7 @@ func (a *App) loadRoutes() {
 }
 
 func (a *App) loadApiRoutes(router chi.Router) {
+
 	apiHandler := &handler.Api{
 		Repo: &api.RedisRepo{
 			Client: a.rdb,
