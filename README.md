@@ -2,6 +2,9 @@
 <h1 align="center">
   BO⚡LT
 </h1>
+<h6 align="center">
+  <code>BIFROST</code>
+</h6>
 <br>
 <p align="center">
   <a href="https://github.com/TROUBLE-1/Vajra/">
@@ -22,3 +25,4 @@
   <a href="#license">License</a>
 </p>
 
+docker run -p 6380:6379 redis:latest
